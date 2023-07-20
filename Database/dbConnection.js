@@ -5,7 +5,7 @@ const DatabaseConnection = () => {
         mongoose.connect(process.env.Connection_STRING).then(()=>{
                 console.log("Database Connected...")
         }).catch((error) => {
-                console.log(`Database error : ${error}`)
+                console.log(`Database error : ${error.message}`)
         })
 }
 

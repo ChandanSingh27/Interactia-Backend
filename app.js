@@ -2,18 +2,20 @@ const express = require('express')
 const bodyparser = require('body-parser')
 const morgan = require('morgan')
 const { errorMiddleware } = require('./middlewares/error.js')
+const userRouter = require('./routes/usersRoutes.js')
 const app = express()
+require('dotenv/config')
 
-//middlewares
-app.use(morgan('dev'))
+const api_version = process.env.API_VERSION
+
+//all middleware of the app here...
 app.use(bodyparser.json())
+app.use(morgan('dev'))
 
-
-// app routes
-app.get('*',(req,res)=>{
-        res.send("lets do it")
-})
+//all routes of app...
+app.use(`${api_version}/users`,userRouter)
 
 module.exports = app
-
+//below line add because its handle all error
 app.use(errorMiddleware)
+
