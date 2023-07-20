@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const UserSchema = mongoose.Schema({
-        authId:{
+        _id:{
                 type: String,
                 unqiue: true,
                 required: true,
@@ -25,7 +25,10 @@ const UserSchema = mongoose.Schema({
                 type: String,
                 unqiue: true,
                 required: true,
-        }
+        },
+        follower: [{type:String}],
+        following: [{type:String}]
+
 })
 
 const UserModel = mongoose.model('Users',UserSchema)
