@@ -26,8 +26,8 @@ const UserSchema = mongoose.Schema({
                 unqiue: true,
                 required: true,
         },
-        follower: [{type:String}],
-        following: [{type:String}]
+        follower: [{type: String}],
+        following: [{type: String}]
 
 })
 
