@@ -2,6 +2,20 @@ const CatchAsyncError = require('../middlewares/catchAsyncError.js');
 const { ErrorHandler } = require('../middlewares/error.js');
 const UserModel = require('../model/usersModel.js');
 
+const userAlreadyRegisterOrNot = async(req,res) => {
+        const {_id} = req.body;
+        let user = await UserModel.findOne({_id})
+        if(!user) res.status(400).json({
+                success: false,
+                message: "user not register..."
+        })
+        else{
+                res.status(200).json({
+                        success: true,
+                        message: "user already register..."
+                })
+        }
+}
 const registerUser = CatchAsyncError(async (req, res, next) => {
         const { _id } = req.body;
         let user = await UserModel.findOne({ _id })
@@ -72,5 +86,5 @@ const unfollowUser = CatchAsyncError(async (req, res, next) => {
         })
 })
 
-module.exports = { registerUser, userNameExistsOrnot, listOfUserFollowersFollowings, userStartFollowing, unfollowUser }
+module.exports = { registerUser, userNameExistsOrnot, listOfUserFollowersFollowings, userStartFollowing, unfollowUser,userAlreadyRegisterOrNot }
 
