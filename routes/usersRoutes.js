@@ -1,5 +1,5 @@
 const express = require('express')
-const { registerUser,userNameExistsOrnot,listOfUserFollowersFollowings,userStartFollowing,unfollowUser } = require('../controller/usersControllers.js')
+const { registerUser,userNameExistsOrnot,listOfUserFollowersFollowings,userStartFollowing,unfollowUser} = require('../controller/usersControllers.js')
 const router = express.Router()
 
 
