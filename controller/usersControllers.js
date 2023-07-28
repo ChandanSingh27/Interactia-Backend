@@ -2,7 +2,7 @@ const CatchAsyncError = require('../middlewares/catchAsyncError.js');
 const { ErrorHandler } = require('../middlewares/error.js');
 const UserModel = require('../model/usersModel.js');
 
-const userAlreadyRegisterOrNot = async(req,res) => {
+const userAlreadyRegisterOrNot = CatchAsyncError(async(req,res,next) => {
         const {_id} = req.body;
         let user = await UserModel.findOne({_id})
         if(!user) res.status(400).json({
@@ -15,7 +15,17 @@ const userAlreadyRegisterOrNot = async(req,res) => {
                         message: "user already register..."
                 })
         }
-}
+})
+
+const uploadUserProfileLink = CatchAsyncError(async (req,res,next) => {
+        let {_id,imageUrl} = req.body;
+        let user = await UserModel.updateOne({_id},{$set: {imageUrl:imageUrl}})
+        res.status(200).json({
+                success:true,
+                message: "image url update successfully"
+        })
+})
+
 const registerUser = CatchAsyncError(async (req, res, next) => {
         const { _id } = req.body;
         let user = await UserModel.findOne({ _id })
@@ -86,5 +96,5 @@ const unfollowUser = CatchAsyncError(async (req, res, next) => {
         })
 })
 
-module.exports = { registerUser, userNameExistsOrnot, listOfUserFollowersFollowings, userStartFollowing, unfollowUser,userAlreadyRegisterOrNot }
+module.exports = { registerUser, userNameExistsOrnot, listOfUserFollowersFollowings, userStartFollowing, unfollowUser,userAlreadyRegisterOrNot,uploadUserProfileLink }
 
