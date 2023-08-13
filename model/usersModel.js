@@ -30,7 +30,7 @@ const UserSchema = mongoose.Schema({
         following: [{type: String}]
 
 })
-
+UserSchema.index({_id: 1},{unique: true})
 const UserModel = mongoose.model('Users',UserSchema)
 
 module.exports = UserModel
