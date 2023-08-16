@@ -23,6 +23,7 @@ const PostSchema = new mongoose.Schema({
                 required: true,
                 type: String,
         },
+        captions: String,
         postUrl: {
                 type: String,
                 required: true,
@@ -34,7 +35,7 @@ const PostSchema = new mongoose.Schema({
         like: [LikeSchema],
         comments: [CommentSchema]
 })
-
+PostSchema.index({uid: 1})
 const PostModel = new mongoose.model("post",PostSchema)
 
 module.exports = PostModel
